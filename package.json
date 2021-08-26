@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "chokidar": "^3.5.2",
+    "express": "^4.17.1",
     "fast-json-stringify": "^2.7.7",
     "fastify": "^3.18.0",
     "fs-extra": "^10.0.0",
