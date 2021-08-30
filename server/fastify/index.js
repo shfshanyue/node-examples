@@ -2,6 +2,12 @@ const fastify = require('fastify')({
   logger: true
 })
 
+// fastify.addContentTypeParser('application/jsoff', function (request, payload, done) {
+// })
+fastify.get('/', (request, reply) => {
+  reply.res.end('hello, world')
+})
+
 fastify.get('/api/users/10086', async (request, reply) => {
   return { userId: 10086, direct: true }
 })
