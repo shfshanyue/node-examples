@@ -1,0 +1,13 @@
+{
+  "name": "napi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "npm run build",
+    "build": "node-gyp rebuild"
+  },
+  "author": "shfshanyue",
+  "license": "ISC",
+  "gypfile": true
+}
