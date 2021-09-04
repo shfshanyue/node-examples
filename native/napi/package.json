@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npm run build",
-    "build": "node-gyp rebuild"
+    "build": "node-gyp rebuild && node-gyp clean"
   },
   "author": "shfshanyue",
   "license": "ISC",
