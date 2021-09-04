@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+      {
+          "name": "Debug node C++ addon",
+          "type": "node",
+          "request": "launch",
+          "program": "${workspaceFolder}/native/napi/index.js",
+          "cwd": "${workspaceFolder}/native/napi"
+      },
+      {
+          "name": "Attach node C/C++ Addon",
+          "type": "lldb",
+          "request": "attach",
+          "pid": "${command:pickMyProcess}"  
+      }
+  ]
+}
