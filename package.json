@@ -21,6 +21,10 @@
     "graceful-fs": "^4.2.6",
     "koa": "^2.13.1",
     "nodemon": "^2.0.7",
-    "slow-json-stringify": "^2.0.1"
+    "slow-json-stringify": "^2.0.1",
+    "ws": "^8.2.2"
+  },
+  "devDependencies": {
+    "@types/ws": "^7.4.7"
   }
 }

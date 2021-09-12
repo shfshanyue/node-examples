@@ -1,16 +1,4 @@
 const fs = require('fs')
-const sleep = s => new Promise(res => setTimeout(res, s))
-
-// interface StreamOptions {
-//   flags?: string;
-//   encoding?: BufferEncoding;
-//   fd?: number | promises.FileHandle;
-//   mode?: number;
-//   autoClose?: boolean;
-//   emitClose?: boolean;
-//   start?: number;
-//   highWaterMark?: number;
-// }
 
 async function main () {
   console.log('示例一:')

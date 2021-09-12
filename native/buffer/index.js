@@ -29,3 +29,42 @@ console.log('\n\n示例二:')
   console.log(Buffer.from(arr).toString())
 }
 
+// 示例三:
+// 通过 Buffer.allocUnsafe 也可提前分配空间，不过其中的数据为随机生成
+console.log('\n\n示例三:')
+{
+  const buf = Buffer.allocUnsafe(4)
+
+  console.log(buf, buf.toString())
+
+  buf[0] = 0x41
+  buf[1] = 0x41
+  buf[2] = 0x41
+  buf[3] = 0x41
+
+  console.log(buf, buf.toString())
+}
+
+// 示例四:
+// 如何正确地把 TypedArray 转化为 Buffer
+console.log('\n\n示例四')
+{
+  const a = new Uint8Array([65, 65, 65, 65])
+  const b = new Uint16Array([65, 65, 65, 65])
+  const c = new Uint32Array([65, 65, 65, 65])
+
+  console.log(a, a.byteLength, b, b.byteLength, c, c.byteLength)
+
+  const bufA = Buffer.from(a)
+  const bufB = Buffer.from(b)
+  const bufC = Buffer.from(c)
+
+  console.log(bufA, bufA.byteLength, bufB, bufB.byteLength, bufC, bufC.byteLength)
+
+  const bufAA = Buffer.from(a)
+  const bufBB = Buffer.from(b.buffer, b.byteOffset, b.byteLength)
+  const bufCC = Buffer.from(c.buffer, c.byteOffset, c.byteLength)
+
+  console.log(bufAA, bufAA.byteLength, bufBB, bufBB.byteLength, bufCC, bufCC.byteLength)
+}
+

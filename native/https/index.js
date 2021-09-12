@@ -1,8 +1,12 @@
-const https = require('https');
+const https = require('https')
 
-https.get('https://icanhazip.com', (res) => {
+https.get('https://icanhazip.com', {
+  
+}, (res) => {
+  const ip = res.socket.remoteAddress
   console.log('statusCode:', res.statusCode);
   console.log('headers:', res.headers);
+  console.log('ip', ip)
   let data = ''
 
   res.on('data', (chunk) => {
@@ -15,4 +19,4 @@ https.get('https://icanhazip.com', (res) => {
 
 }).on('error', (e) => {
   console.error(e);
-});
+})

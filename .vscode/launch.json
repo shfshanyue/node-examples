@@ -1,18 +1,32 @@
 {
   "version": "0.2.0",
   "configurations": [
-      {
-          "name": "Debug node C++ addon",
-          "type": "node",
-          "request": "launch",
-          "program": "${workspaceFolder}/native/napi/index.js",
-          "cwd": "${workspaceFolder}/native/napi"
-      },
-      {
-          "name": "Attach node C/C++ Addon",
-          "type": "lldb",
-          "request": "attach",
-          "pid": "${command:pickMyProcess}"  
-      }
+    {
+      "name": "Debug napi",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/native/napi/index.js",
+      "cwd": "${workspaceFolder}/native/napi"
+    },
+    {
+      "name": "Attact Node Program",
+      "type": "node",
+      "request": "attach",
+      "port": 9229
+    },
+    {
+      "name": "(lldb) Node Source Code",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "/usr/local/bin/node_g",
+      "stopAtEntry": true,
+      "cwd": "${workspaceFolder}",
+    
+      // 对于 JS 打开调试，调试文件为根目录中的 demo.js 
+      "args": ["--inspect-brk", "${workspaceFolder}/server/hello/index.js"],
+      "environment": [],
+      "externalConsole": true,
+      "MIMode": "lldb"
+    }
   ]
 }
