@@ -2,3 +2,4 @@ node_modules
 build
 .gitignore
 package-lock.gz
+.DS_Store
