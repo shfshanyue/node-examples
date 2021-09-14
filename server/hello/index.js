@@ -42,5 +42,16 @@ const f5 = async (req, res) => {
   await sleep(5000)
 }
 
-const server = http.createServer(f1)
+// 示例六:
+// 可以
+const f6 = async (req, res) => {
+  res.setHeader('X-CUSTOM-HEADER', 'shanyue')
+  res.getHeader('X-CUSTOM-HEADER')
+  res.getHeader('x-custom-header')
+  res.getHeaders()
+  res.getHeaderNames()
+  res.end(JSON.stringify(res.getHeaders()))
+}
+
+const server = http.createServer(f2)
 server.listen(3200)

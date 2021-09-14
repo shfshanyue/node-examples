@@ -1,18 +1,19 @@
 const fs = require('fs')
-const { pipeline } = require('stream')
+const { pipeline, Readable, Writable } = require('stream')
 const sleep = s => new Promise(res => setTimeout(res, s))
 const getStream = require('get-stream')
 
-f1()
+f8()
 
 // 示例一:
 // 以流的方式读取文件
-function f1 () {
+function f1() {
   console.log('示例一:')
   const stream = fs.createReadStream('./example.jsonl', {
     // highWaterMark: 2000
   })
 
+  // 同一个 stream 可以读取多次，监听多次 data 事件
   stream.on('data', (chunk) => {
     console.log('Demo 1.1 Chunk: ', chunk)
     console.log('Demo 1.1 Chunk_String', chunk.toString())
@@ -30,8 +31,8 @@ function f1 () {
 
 
 // 示例二:
-// 以流的方式读取文件，分为多个 chunk 进行读
-function f2 () {
+// 以流的方式读取文件，可根据 `highWaterMark` 分为多个 chunk 进行读取
+function f2() {
   console.log('示例二:')
   let data = ''
 
@@ -50,7 +51,7 @@ function f2 () {
   })
 }
 
-function f3 () {
+function f3() {
   const stream = fs.createReadStream('./example.jsonl', { highWaterMark: 10 })
 
   stream.on('readable', o => {
@@ -67,51 +68,97 @@ function f3 () {
   console.log('stream.readableLength', stream.readableLength)
 }
 
+// 示例三:
+// destroy() 会触发 close 事件
+function f4() {
+  const stream = Readable.from('hello, world')
 
-// 示例四:
-// 以管道的方式对文件进行操作
-function f4 () {
-  pipeline(
-    fs.createReadStream('./example.jsonl'),
-    async function* (source) {
-      for await (const chunk of source) {
-        console.log('Demo 4.1', chunk.toString())
-        yield chunk.toString().toUpperCase()
-      }
-    },
-    async function* (source) {
-      for await (const chunk of source) {
-        console.log('Demo 4.2', chunk.toString())
-        yield chunk.toString().toUpperCase()
-      }
-    },
-    fs.createWriteStream('example-pipe.jsonl'),
-    err => {
-      console.log(err)
-    }
-  )
+  stream.on('close', () => {
+    console.log('CLOSE')
+  })
+
+  // destory 将触发 close/error 事件，如果参数为 Error 则触发 error 事件
+  stream.destroy()
 }
 
-// 示例五:
-// 
-function f5 () {
-  pipeline(
-    fs.createReadStream('./example.jsonl'),
-    async function* (source) {
-      for await (const chunk of source) {
-        console.log('Demo 4.1', chunk.toString())
-        yield chunk.toString().toUpperCase()
-      }
-    },
-    async function* (source) {
-      for await (const chunk of source) {
-        console.log('Demo 4.2', chunk.toString())
-        yield chunk.toString().toUpperCase()
-      }
-    },
-    fs.createWriteStream('example-pipe.jsonl'),
-    err => {
-      console.log(err)
+// 示例四:
+// destroy() 会触发 error/close 事件
+function f5() {
+  console.log('示例四')
+  const stream = Readable.from('hello, world')
+
+  stream.on('close', () => {
+    console.log('CLOSE')
+  })
+
+  stream.on('error', (err) => {
+    console.log('ERROR')
+  })
+
+  stream.on('end', () => {
+    console.log('END')
+  })
+
+  // destory 将触发 error/close 事件，如果参数为 Error 则触发 error/close 事件
+  stream.destroy(new Error('err'))
+}
+
+// 示例:
+// 当接收到 end 时间后，
+// End 是如何触发的？
+function f6() {
+  const stream = Readable.from('hello, world')
+
+  // 数据读取之后会触发 end 事件
+  stream.on('end', () => {
+    console.log('END')
+
+    // END 之后无法读取数据
+    stream.on('data', (d) => { console.log(d) })
+  })
+
+  stream.on('data', (d) => { console.log(d) })
+  stream.on('data', (d) => { console.log(d) })
+}
+
+
+// 示例:
+// ReadableStream 可通过 pause/resume 控制读取的速率
+function f7() {
+  const stream = Readable.from(Array.from('hello, world.'), {
+    highWaterMark: 1
+  })
+
+  // 每次读取两个数据
+  stream.on('data', chunk => {
+    console.log(chunk.toString())
+    stream.pause()
+    console.log('3s 后继续读取流数据')
+    setTimeout(() => {
+      stream.resume()
+    }, 3000)
+  })
+}
+
+// 示例:
+// 通过重写 _read 或者 options.read 可自定义 ReadableStream
+function f8 () {
+  const stream = new Readable({
+    highWaterMark: 3,
+    read () {
+      this.push('A')
+      this.push('BB')
+      this.push('CCC')
+      this.push('DDDD')
+      this.push('EEEEE')
+
+      // null 意味着结束
+      // 如果注释掉以下行，则会不断 push 进数据
+      this.push(null)
     }
-  )
+  })
+
+  stream.on('data', (chunk) => {
+    console.log(chunk.toString())
+  })
 }

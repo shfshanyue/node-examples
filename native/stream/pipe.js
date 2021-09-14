@@ -41,55 +41,54 @@ f = () => {
 fns.push(f)
 
 
-// 示例三:
-// destroy() 会触发 close 事件
-f = () => {
-  const stream = Readable.from('hello, world')
-
-  stream.on('close', () => {
-    console.log('CLOSE')
-  })
-
-  // destory 将触发 close/error 事件，如果参数为 Error 则触发 error 事件
-  stream.destroy()
-}
-fns.push(f)
-
 // 示例四:
-// destroy() 会触发 error/close 事件
-f = () => {
-  console.log('示例四')
-  const stream = Readable.from('hello, world')
-
-  stream.on('close', () => {
-    console.log('CLOSE')
-  })
-
-  stream.on('error', (err) => {
-    console.log('ERROR')
-  })
-
-  // destory 将触发 error/close 事件，如果参数为 Error 则触发 error/close 事件
-  stream.destroy(new Error('err'))
+// 以管道的方式对文件进行操作
+function f4() {
+  pipeline(
+    fs.createReadStream('./example.jsonl'),
+    async function* (source) {
+      for await (const chunk of source) {
+        console.log('Demo 4.1', chunk.toString())
+        yield chunk.toString().toUpperCase()
+      }
+    },
+    async function* (source) {
+      for await (const chunk of source) {
+        console.log('Demo 4.2', chunk.toString())
+        yield chunk.toString().toUpperCase()
+      }
+    },
+    fs.createWriteStream('example-pipe.jsonl'),
+    err => {
+      console.log(err)
+    }
+  )
 }
-fns.push(f)
 
 // 示例五:
-// 当接收到 end 时间后，
-// End 是如何触发的？
-f = () => {
-  const stream = Readable.from('hello, world')
-  stream.on('end', () => {
-    console.log('END')
-
-    // END 之后无法读取数据
-    stream.on('data', (d) => { console.log(d) })
-  })
-
-  stream.on('data', (d) => { console.log(d) })
-  stream.on('data', (d) => { console.log(d) })
+// 
+function f5() {
+  pipeline(
+    fs.createReadStream('./example.jsonl'),
+    async function* (source) {
+      for await (const chunk of source) {
+        console.log('Demo 4.1', chunk.toString())
+        yield chunk.toString().toUpperCase()
+      }
+    },
+    async function* (source) {
+      for await (const chunk of source) {
+        console.log('Demo 4.2', chunk.toString())
+        yield chunk.toString().toUpperCase()
+      }
+    },
+    fs.createWriteStream('example-pipe.jsonl'),
+    err => {
+      console.log(err)
+    }
+  )
 }
-fns.push(f)
+
 
 const RUNID = 4
 fns[RUNID]()
