@@ -106,6 +106,8 @@ function f5() {
 // 示例:
 // 当接收到 end 时间后，
 // End 是如何触发的？
+// End 是如何触发的？
+// End 是如何触发的？
 function f6() {
   const stream = Readable.from('hello, world')
 
@@ -117,8 +119,12 @@ function f6() {
     stream.on('data', (d) => { console.log(d) })
   })
 
-  stream.on('data', (d) => { console.log(d) })
-  stream.on('data', (d) => { console.log(d) })
+  stream.on('data', (d) => {
+    console.log(d)
+  })
+  stream.on('data', (d) => {
+    console.log(d)
+  })
 }
 
 
@@ -146,11 +152,11 @@ function f8 () {
   const stream = new Readable({
     highWaterMark: 3,
     read () {
-      this.push('A')
-      this.push('BB')
-      this.push('CCC')
-      this.push('DDDD')
-      this.push('EEEEE')
+      console.log(this.push('A'))
+      console.log(this.push('BB'))
+      console.log(this.push('CCC'))
+      console.log(this.push('DDDD'))
+      console.log(this.push('EEEEE'))
 
       // null 意味着结束
       // 如果注释掉以下行，则会不断 push 进数据
