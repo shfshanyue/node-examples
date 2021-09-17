@@ -6,6 +6,7 @@ const getStream = require('get-stream')
 // 1. end 事件是如何触发的？
 // 1. 什么时候 state.flowing 状态为 true
 // 1. 什么时候 state.buffered 缓存多余的状态
+// 1. eos
 
 let run, f;
 
