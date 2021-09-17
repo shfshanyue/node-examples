@@ -1,9 +1,13 @@
 const fs = require('fs')
-const { pipeline, Readable, Writable } = require('stream')
-const sleep = s => new Promise(res => setTimeout(res, s))
+const { Readable } = require('stream')
 const getStream = require('get-stream')
 
-f8()
+// 1. 如何自定义一个 Readable
+// 1. end 事件是如何触发的？
+// 1. 什么时候 state.flowing 状态为 true
+// 1. 什么时候 state.buffered 缓存多余的状态
+
+let run, f;
 
 // 示例一:
 // 以流的方式读取文件
@@ -168,3 +172,19 @@ function f8 () {
     console.log(chunk.toString())
   })
 }
+
+// on data -> flowing !== null -> resume -> read(0) -> _read(n) -> readable.push -> flow -> endReadStream -> 'end'
+// 如果监听了 data 事件，flowing !== null 时(初始状态)，则自动 resume()，resume 结束后没有数据时触发 end
+f = () => {
+  const stream = Readable.from(['A', 'B'])
+
+  stream.on('end', () => {
+    console.log('END')
+  })
+
+  stream.on('data', (chunk) => {
+    console.log(chunk)
+  })
+}
+
+f()
