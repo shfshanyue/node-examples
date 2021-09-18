@@ -4,3 +4,4 @@ build
 package-lock.gz
 .DS_Store
 jsonl
+*.out
