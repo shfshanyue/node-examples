@@ -73,7 +73,9 @@
     "unordered_map": "cpp",
     "unordered_set": "cpp",
     "utility": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "tree.h": "c",
+    "internal.h": "c"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }

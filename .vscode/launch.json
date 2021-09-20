@@ -23,7 +23,7 @@
       "cwd": "${workspaceFolder}",
     
       // 对于 JS 打开调试，调试文件为根目录中的 demo.js 
-      "args": ["--inspect-brk", "${workspaceFolder}/server/hello/index.js"],
+      "args": ["${workspaceFolder}/server/hello/index.js"],
       "environment": [],
       "externalConsole": true,
       "MIMode": "lldb"

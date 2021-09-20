@@ -2,6 +2,8 @@ const http = require('http')
 const fs = require('fs')
 const sleep = (seconds) => new Promise(resolve => setTimeout(resolve, seconds))
 
+// fs.writeFile('./a.js', 'hello', () => {})
+
 // 示例一: hello, world
 const f1 = (req, res) => {
   // res.end 表示所有的 header 以及 body 发送完毕，Server 将标记该 Message 为 complete
