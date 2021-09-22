@@ -1,11 +1,42 @@
 const crypto = require('crypto')
 const { Buffer } = require('buffer')
 
+let f, run
+
+f = () => {
+  // md5 生成 128 为散列值
+  const a = crypto.createHash('md5').update('hello, world').digest('hex')
+  console.log(a, a.length)
+
+  // 使用 Buffer 将与 string 一样，生成一致的 hash
+  const b = crypto.createHash('md5').update(Buffer.from('hello, world')).digest('hex')
+  console.log(b, b.length)
+
+  // 多次使用 update 与 一次update 一样，都会生成一致的 hash
+  const hash = crypto.createHash('md5')
+  hash.update('hello, ')
+  hash.update('world')
+
+  const c = hash.digest('hex')
+  console.log(c, c.length)
+
+  // Uint8Array、Buffer、String 都将生成一致的 hash
+  const d = crypto.createHash('md5').update(new Uint8Array(Array.from('hello, world', x => x.charCodeAt()))).digest('hex')
+  console.log(d, d.length)
+
+  // Uint16Array 中字节数翻倍，将不会生成一致的 hash
+  const e = crypto.createHash('md5').update(new Uint16Array(Array.from('hello, world', x => x.charCodeAt()))).digest('hex')
+  console.log(e, e.length)
+
+}
+
+run = f
+
 // 示例一:
 // Keyed-Hashing for Message Authentication。可认为带有 secrect 的 hash 算法，hash+salt 的升级版
 // 基于 sha256 的消息认证算法，将生成 256 位的摘要
-console.log('示例一:')
-{
+f = () => {
+  console.log('示例一:')
   const secret = 'secret of shanyue'
   const hash = crypto.createHmac('sha256', secret)
     .update('hello, world')
@@ -15,10 +46,11 @@ console.log('示例一:')
   console.log(hash, hash.length)
 }
 
+
 // 示例二:
 // 哈希算法，通过 createHash 将生成一个可转化流 (transform stream)
-console.log('\n\n示例二:')
-{
+f = () => {
+  console.log('\n\n示例二:')
   const hash = crypto.createHash('sha256')
 
   // hash 将作为一个 Transform Stream
@@ -45,8 +77,9 @@ console.log('\n\n示例二:')
 
 
 // 示例三:
-console.log('\n\n示例三:')
-{
+f = () => {
+  console.log('\n\n示例三:')
+
   // 算法(aes192)+模式(cbc)
   // aes: Advanced Encryption Standard。支持 128、192、256
   // cbc: Cipher-block chaining。串行加密，并行解密
@@ -80,7 +113,7 @@ console.log('\n\n示例三:')
 }
 
 // 示例四:
-{
+f = () => {
   const algorithm = 'aes-192-cbc'
   const password = 'password of shanyue'
 
@@ -109,3 +142,5 @@ console.log('\n\n示例三:')
   decipher.write(encrypted, 'hex')
   decipher.end()
 }
+
+run()

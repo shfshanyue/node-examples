@@ -61,9 +61,11 @@ console.log('\n\n示例四')
 
   console.log(bufA, bufA.byteLength, bufB, bufB.byteLength, bufC, bufC.byteLength)
 
+  // 使用 Buffer.from(buffer, buffer.byteOffset, buffer.byteLength) 才能正确地将 TypedArray 转化为 Buffer
   const bufAA = Buffer.from(a)
-  const bufBB = Buffer.from(b.buffer, b.byteOffset, b.byteLength)
-  const bufCC = Buffer.from(c.buffer, c.byteOffset, c.byteLength)
+  const bufBB = Buffer.from(b.buffer)
+  // const bufCC = Buffer.from(c.buffer, c.byteOffset, c.byteLength)
+  const bufCC = Buffer.from(c.buffer)
 
   console.log(bufAA, bufAA.byteLength, bufBB, bufBB.byteLength, bufCC, bufCC.byteLength)
 }

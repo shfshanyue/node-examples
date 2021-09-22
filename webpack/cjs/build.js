@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const path = require('path')
 
 // `webpack-cli` 与 `webpack/cli` 调来调去，逻辑复杂，为了方便，直接使用其 node api 进行示例，方便调试
 
@@ -33,6 +34,21 @@ function f3 () {
   })
 }
 
-f3().run((err, stat) => {
-  console.log(stat.toJson())
+function f4 () {
+  return webpack({
+    entry: './index.js',
+    mode: 'none',
+    output: {
+      filename: '[name].[contenthash:8].js',
+      chunkFilename: '[name].[contenthash:8].chunk.js',
+      path: path.resolve(__dirname, 'dist/runtime')
+    },
+    optimization: {
+      runtimeChunk: true,
+    }
+  })
+}
+
+f4().run((err, stat) => {
+  // console.log(stat.toJson())
 })
