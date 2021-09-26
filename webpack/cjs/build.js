@@ -11,10 +11,24 @@ function f1 () {
   return webpack({
     entry: './index.js',
     mode: 'none',
+    output: {
+      iife: false,
+      pathinfo: 'verbose'
+    }
   })
 }
 
 function f2 () {
+  return webpack({
+    entry: './index.js',
+    mode: 'none',
+    output: {
+      chunkLoading: 'import'
+    }
+  })
+}
+
+function f3 () {
   return webpack({
     entry: './index.js',
     mode: 'production',
@@ -24,7 +38,7 @@ function f2 () {
   })
 }
 
-function f3 () {
+function f4 () {
   return webpack({
     entry: './index.js',
     mode: 'none',
@@ -34,7 +48,7 @@ function f3 () {
   })
 }
 
-function f4 () {
+function f5 () {
   return webpack({
     entry: './index.js',
     mode: 'none',
@@ -49,6 +63,6 @@ function f4 () {
   })
 }
 
-f4().run((err, stat) => {
+f1().run((err, stat) => {
   // console.log(stat.toJson())
 })

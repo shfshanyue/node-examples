@@ -4,6 +4,8 @@ const { Buffer } = require('buffer')
 let f, run
 
 f = () => {
+  let hash, x
+
   // md5 生成 128 为散列值
   const a = crypto.createHash('md5').update('hello, world').digest('hex')
   console.log(a, a.length)
@@ -13,7 +15,7 @@ f = () => {
   console.log(b, b.length)
 
   // 多次使用 update 与 一次update 一样，都会生成一致的 hash
-  const hash = crypto.createHash('md5')
+  hash = crypto.createHash('md5')
   hash.update('hello, ')
   hash.update('world')
 
@@ -28,6 +30,11 @@ f = () => {
   const e = crypto.createHash('md5').update(new Uint16Array(Array.from('hello, world', x => x.charCodeAt()))).digest('hex')
   console.log(e, e.length)
 
+  hash = crypto.createHash('md5')
+  hash.update(Buffer.from('hello, ')) 
+  hash.update(Buffer.from('world')) 
+  x = hash.digest('hex')
+  console.log(x, x.length)
 }
 
 run = f
@@ -143,4 +150,9 @@ f = () => {
   decipher.end()
 }
 
+f = () => {
+  const b = Buffer.concat([Buffer.from('hello, '), Buffer.from('world')])
+  console.log(b, b.toString())
+}
+run = f;
 run()

@@ -25,13 +25,26 @@ function f2 () {
     mode: 'none',
     output: {
       filename: 'main.[contenthash].js',
-      chunkFilename: '[id].chunk.[chunkhash].js',
-      path: path.resolve(__dirname, 'dist/chunkhash')
+      chunkFilename: '[id].chunk.[contenthash].js',
+      path: path.resolve(__dirname, 'dist/contenthash')
     }
   })
 }
 
 function f3 () {
+  return webpack({
+    entry: './index.js',
+    mode: 'none',
+    output: {
+      filename: 'main.[contenthash].js',
+      chunkFilename: '[id].chunk.[chunkhash].js',
+      path: path.resolve(__dirname, 'dist/import'),
+      chunkLoading: 'import'
+    }
+  })
+}
+
+function f4 () {
   return webpack({
     entry: './index.js',
     mode: 'none',
@@ -47,7 +60,8 @@ function f3 () {
   })
 }
 
-function f4 () {
+// 当 runtimeChunk 设置为 true 时，将单独把 webpack 的运行时给独立出来
+function f5 () {
   return webpack({
     entry: './index.js',
     mode: 'none',
@@ -64,6 +78,6 @@ function f4 () {
   })
 }
 
-f4().run((err, stat) => {
+f3().run((err, stat) => {
   console.log(stat.toJson())
 })
