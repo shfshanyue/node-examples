@@ -37,8 +37,9 @@ function f3 () {
     mode: 'none',
     output: {
       filename: 'main.[contenthash].js',
-      chunkFilename: '[id].chunk.[chunkhash].js',
+      chunkFilename: '[name].chunk.[chunkhash].js',
       path: path.resolve(__dirname, 'dist/import'),
+      clean: true,
       chunkLoading: 'import'
     }
   })
@@ -68,7 +69,8 @@ function f5 () {
     output: {
       filename: '[name].[contenthash].js',
       chunkFilename: '[name].[contenthash].chunk.js',
-      path: path.resolve(__dirname, 'dist/runtime')
+      path: path.resolve(__dirname, 'dist/runtime'),
+      clean: true
     },
     optimization: {
       moduleIds: 'deterministic',
@@ -78,6 +80,6 @@ function f5 () {
   })
 }
 
-f3().run((err, stat) => {
+f5().run((err, stat) => {
   console.log(stat.toJson())
 })

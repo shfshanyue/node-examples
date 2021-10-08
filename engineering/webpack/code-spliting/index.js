@@ -1,7 +1,7 @@
-import('./sum').then(m => {
+import(  /* webpackChunkName: 'sum' */ './sum').then(m => {
   console.log(m.default(3, 4))
 
-  import('./add').then(m => {
+  import(/* webpackChunkName: 'add' */ './add').then(m => {
     console.log(m.default(3, 4))
   })
 })
