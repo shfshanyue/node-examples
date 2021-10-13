@@ -1,21 +1,21 @@
-const path = require('path')
 const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 function f1 () {
   return webpack({
     entry: './index.js',
     mode: 'none',
-    output: {
-      assetModuleFilename: 'images/[hash][ext]'
-    },
     module: {
       rules: [
         {
-          test: /\.(png|jpg|svg)$/,
-          type: 'asset'
+          test: /\.css$/,
+          use: ['style-loader']
         }
       ]
-    }
+    },
+    plugins: [
+      new HtmlWebpackPlugin()
+    ]
   })
 }
 
