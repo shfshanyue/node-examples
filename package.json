@@ -27,6 +27,7 @@
     "graceful-fs": "^4.2.8",
     "html-webpack-plugin": "^5.3.2",
     "koa": "^2.13.3",
+    "mini-css-extract-plugin": "^2.4.2",
     "mustache": "^4.2.0",
     "nodemon": "^2.0.13",
     "rollup": "^2.58.0",
