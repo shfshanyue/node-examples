@@ -13,8 +13,9 @@ function f1 () {
     mode: 'none',
     output: {
       filename: 'main.[contenthash].js',
-      chunkFilename: '[id].chunk.[contenthash].js',
-      path: path.resolve(__dirname, 'dist/contenthash')
+      chunkFilename: '[name].chunk.[contenthash].js',
+      path: path.resolve(__dirname, 'dist/contenthash'),
+      clean: true
     }
   })
 }
@@ -80,6 +81,6 @@ function f5 () {
   })
 }
 
-f5().run((err, stat) => {
+f1().run((err, stat) => {
   console.log(stat.toJson())
 })
