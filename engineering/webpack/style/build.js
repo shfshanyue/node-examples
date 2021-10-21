@@ -11,7 +11,7 @@ function f1 () {
       rules: [
         {
           test: /\.css$/,
-          use: ['style-loader']
+          use: ['style-loader', 'css-loader']
         }
       ]
     },
@@ -98,6 +98,6 @@ function f4 () {
   })
 }
 
-f4().run(() => {
+f1().run(() => {
 
 })
