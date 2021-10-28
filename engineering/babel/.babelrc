@@ -1,8 +1,0 @@
-{
-  "targets": ">0.5%",
-  "assumptions": {
-    "noDocumentAll": true,
-    "noClassCalls": true
-  },
-  "presets": ["@babel/preset-env"]
-}
