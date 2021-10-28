@@ -1,6 +1,4 @@
-const flat = require('core-js/features/array/flat')
+const any = require('core-js/stable/promise/any')
 
-const l = flat([1, [2, [ 3, [ 4]]]], 5)
-
-console.log(l)
-
+any([1, 2, 3]).then(o => console.log(o))
+Promise.any([1, 2, 3]).then(o => console.log(o))
