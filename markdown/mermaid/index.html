@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <div class="editor-mermaid">
+    graph LR;
+    a(Find elements)-->b{Processed}
+    b-->|Yes|c(Leave element)
+    b-->|No |d(Transform)
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@8.13.3/dist/mermaid.js"></script>
+  <script type="module">
+  import "./index.js"
+  </script>
+</body>
+
+</html>
