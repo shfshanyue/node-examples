@@ -1,0 +1,15 @@
+{
+  "name": "topology-dup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shfshanyue",
+  "license": "ISC",
+  "dependencies": {
+    "has-ansi": "^4.0.0",
+    "strip-ansi": "^7.0.1"
+  }
+}
