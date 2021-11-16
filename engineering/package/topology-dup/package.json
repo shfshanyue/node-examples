@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "has-ansi": "^4.0.0",
+    "serve": "^13.0.2",
     "strip-ansi": "^7.0.1"
   }
 }
