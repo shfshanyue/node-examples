@@ -22,16 +22,23 @@ function f1 () {
     mode: 'none',
     output: {
       clean: true,
-      chunkFilename: '[name].chunk.js'
+      chunkFilename: '[name].chunk.js',
+       
     },
     optimization: {
       runtimeChunk: true,
+      chunkIds: 'deterministic',
       splitChunks: {
-        // chunks: 'all',
-        minChunks: 1,
-        minSize: 0,
-        minRemainingSize: 0,
-        minSizeReduction: 0,
+        chunks: 'all',
+        cacheGroups: {
+          vendor: {
+            minChunks: 2,
+            // maxAsyncRequests: 100,
+            // maxInitialRequests: 100,
+            minSize: 0,
+            name: 'vendor'
+          }
+        }
       }
     }
   })

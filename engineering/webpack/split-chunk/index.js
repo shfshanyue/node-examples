@@ -1,6 +1,4 @@
-import common from './common'
+import(/* webpackChunkName: "page1" */ './page1')
+import(/* webpackChunkName: "page2" */ './page2')
 
-import('./page1')
-import('./page2')
-
-console.log(common)
+console.log('ENTRY')
