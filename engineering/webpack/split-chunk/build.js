@@ -32,6 +32,9 @@ function f1 () {
         chunks: 'all',
         cacheGroups: {
           vendor: {
+            test () {
+
+            },
             minChunks: 2,
             // maxAsyncRequests: 100,
             // maxInitialRequests: 100,
