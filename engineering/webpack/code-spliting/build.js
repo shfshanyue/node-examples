@@ -53,7 +53,8 @@ function f4 () {
     output: {
       filename: '[name].[contenthash].js',
       chunkFilename: 'chunk.[name].[id].[contenthash].js',
-      path: path.resolve(__dirname, 'dist/deterministic')
+      path: path.resolve(__dirname, 'dist/deterministic'),
+      clean: true
     },
     optimization: {
       moduleIds: 'deterministic',
@@ -81,6 +82,6 @@ function f5 () {
   })
 }
 
-f1().run((err, stat) => {
+f4().run((err, stat) => {
   console.log(stat.toJson())
 })
