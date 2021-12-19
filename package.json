@@ -1,7 +1,7 @@
 {
   "name": "examples",
   "version": "1.0.0",
-  "description": "",
+  "description": "## 目录结构",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,7 +9,7 @@
   "workspaces": [
     "server/*"
   ],
-  "author": "",
+  "author": "shfshanyue",
   "license": "ISC",
   "dependencies": {
     "@babel/cli": "^7.16.0",
@@ -21,6 +21,7 @@
     "@rollup/plugin-html": "^0.2.4",
     "@types/mermaid": "^8.2.7",
     "@types/ws": "^8.2.0",
+    "ansi-regex": "^6.0.1",
     "autoprefixer": "^10.4.0",
     "browserslist": "^4.18.1",
     "chokidar": "^3.5.2",
@@ -60,5 +61,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shfshanyue/node-examples.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shfshanyue/node-examples/issues"
+  },
+  "homepage": "https://github.com/shfshanyue/node-examples#readme"
 }

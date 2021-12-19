@@ -1,0 +1,14 @@
+lockfileVersion: 5.3
+
+specifiers:
+  ansi-regex: ^6.0.1
+
+dependencies:
+  ansi-regex: 6.0.1
+
+packages:
+
+  /ansi-regex/6.0.1:
+    resolution: {integrity: sha512-n5M855fKb2SsfMIiFFoVrABHJC8QtHwVx+mHWP3QcEqBHYienj5dHSgjbxtC0WEZXYt4wcD6zrQElDPhFuZgfA==}
+    engines: {node: '>=12'}
+    dev: false
