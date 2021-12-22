@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx serve . -p 8080"
+    "start": "serve . -p 8080"
+  },
+  "dependencies": {
+    "serve": "^13.0.2"
   },
   "author": "shfshanyue",
   "license": "ISC"
