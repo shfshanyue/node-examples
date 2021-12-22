@@ -1,0 +1,14 @@
+{
+  "name": "hook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo test",
+    "echo": "echo hello",
+    "preecho": "echo 'hello -> Before'",
+    "postecho": "echo 'hello -> After'"
+  },
+  "author": "shfshanyue",
+  "license": "ISC"
+}
