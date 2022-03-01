@@ -12,6 +12,7 @@
   "author": "shfshanyue",
   "license": "ISC",
   "dependencies": {
+    "@apollo/client": "^3.5.9",
     "@babel/cli": "^7.16.0",
     "@babel/parser": "^7.16.3",
     "@babel/plugin-proposal-logical-assignment-operators": "^7.16.0",
@@ -31,6 +32,7 @@
     "compression-webpack-plugin": "^9.2.0",
     "core-js": "^3.19.1",
     "core-js-pure": "^3.19.1",
+    "crypto-hash": "^2.0.1",
     "css-loader": "^6.5.1",
     "eslint": "^8.2.0",
     "express": "^4.17.1",
