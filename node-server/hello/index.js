@@ -45,7 +45,7 @@ const f5 = async (req, res) => {
 }
 
 // 示例六:
-// 可以
+// header 在设置时将会忽略大小写
 const f6 = async (req, res) => {
   res.setHeader('X-CUSTOM-HEADER', 'shanyue')
   res.getHeader('X-CUSTOM-HEADER')

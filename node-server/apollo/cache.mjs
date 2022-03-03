@@ -1,7 +1,10 @@
 import { ApolloServer, gql } from 'apollo-server'
 import { ApolloServerPluginCacheControl } from 'apollo-server-core'
+import responseCachePlugin from 'apollo-server-plugin-response-cache'
 
-// 1. 当使用了 APQ 与 
+// 1. 当使用了 APQ 时，可通过 CacheControl 指令配置 HTTP Cache-Control Header
+// 2. 不管使用 ApolloServerPluginCacheControl 还是 responseCachePlugin，均是整体进行缓存
+// 3. 按字段缓存，需自己实现
 
 const typeDefs = gql`
   enum CacheControlScope {
@@ -36,7 +39,9 @@ const todos = [
 
 const resolvers = {
   Query: {
-    todos () {
+    todos (root, args, context, info) {
+      // 根据 info.cacheControl 可获取得到关于其 cacheControl 的配置
+      console.log(info.cacheControl)
       return todos
     },
     hello () {
@@ -53,6 +58,7 @@ const server = new ApolloServer({
       defaultMaxAge: 1000,
       calculateHttpHeaders: true
     }),
+    responseCachePlugin.default()
   ],
 })
 

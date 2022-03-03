@@ -1,5 +1,4 @@
 import { ApolloServer, gql } from 'apollo-server'
-import { ApolloServerPluginCacheControl } from 'apollo-server-core'
 
 const typeDefs = gql`
   type Todo {
