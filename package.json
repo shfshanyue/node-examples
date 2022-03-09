@@ -48,6 +48,7 @@
     "html-webpack-plugin": "^5.5.0",
     "iconv-lite": "^0.6.3",
     "koa": "^2.13.4",
+    "mathjs": "^10.4.0",
     "mermaid": "^8.13.3",
     "mini-css-extract-plugin": "^2.4.4",
     "mustache": "^4.2.0",
