@@ -33,7 +33,21 @@ f = ctx => {
 
 f = (ctx) => {
   // Koa 通过 parseurl 这个库进行 URL 解析
+  // parseurl 将只会解析一次，进行缓存，不会重复解析，可查看其 fresh 方法
+  // https://github.com/pillarjs/parseurl/blob/master/index.js#L153
+  const a = ctx.query.a
+  const b = ctx.query.b
+  const path = ctx.path
   ctx.body = ctx.query
+}
+
+f = (ctx) => {
+  const charset = ctx.request.charset
+
+  const b = ctx.request.charset
+
+  ctx.request.accepts('json')
+  ctx.body = charset
 }
 
 handleRequest = f
