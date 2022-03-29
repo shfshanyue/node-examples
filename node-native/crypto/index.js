@@ -154,5 +154,4 @@ f = () => {
   const b = Buffer.concat([Buffer.from('hello, '), Buffer.from('world')])
   console.log(b, b.toString())
 }
-run = f;
 run()

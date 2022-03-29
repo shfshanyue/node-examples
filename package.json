@@ -34,6 +34,7 @@
     "core-js": "^3.19.1",
     "core-js-pure": "^3.19.1",
     "crypto-hash": "^2.0.1",
+    "crypto-js": "^4.1.1",
     "css-loader": "^6.5.1",
     "eslint": "^8.2.0",
     "express": "^4.17.1",
