@@ -9,5 +9,6 @@ func hello() {
 func main() {
 	hello()
 	go hello()
+	go hello()
 	fmt.Println("main function")
 }

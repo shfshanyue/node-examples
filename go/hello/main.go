@@ -2,6 +2,11 @@ package main
 
 import "fmt"
 
+// 1. 如何遍历输出 map 的 k/v
+// 2. 如何遍历输出 array
+// 3. 如何构造 [0..100] 的数组
+// 4. rune 是什么
+
 const (
 	RED = iota
 	GREEN
@@ -35,4 +40,6 @@ func main() {
 	}
 
 	fmt.Println(RED)
+
+	arr := {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 }
