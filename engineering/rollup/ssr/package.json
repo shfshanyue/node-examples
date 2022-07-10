@@ -1,0 +1,11 @@
+{
+  "name": "@shanyue/base64",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "shfshanyue",
+  "exports": {
+    "node": "base64.node.js",
+    "broswer": "base64.browser.js"
+  },
+  "license": "MIT"
+}
