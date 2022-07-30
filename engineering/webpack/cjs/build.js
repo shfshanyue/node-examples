@@ -3,10 +3,14 @@ const path = require('path')
 
 // `webpack-cli` 与 `webpack/cli` 调来调去，逻辑复杂，为了方便，直接使用其 node api 进行示例，方便调试
 
-// 1. webpack 的运行时代码是如何加载模块的
-// 1. [content-hash].js 中的 hash 是如何生成的
-// 
+// 1. webpack 的运行时代码分析
+// 2. output.filename template
+// 3. [contenthash].js 中的 hash 是如何生成的
+// 4. [id] 与 [name] 是如何生成的
+// 5. 试试 mode 为 production/development/none 时运行时代码有何不同
+// 6. output.path 如何指定打包目录为 build 目录
 
+// webpack 的运行时代码分析
 function f1 () {
   return webpack({
     entry: './index.js',
@@ -18,45 +22,97 @@ function f1 () {
   })
 }
 
+// webpack 的 runtimeChunk 单独分离，默认打包文件为 runtime~main.js
+// 阅读 runtimeChunk 代码，它代表什么意思？可留在 chunk 篇时继续理解，见 https://github.com/shfshanyue/node-examples/tree/master/engineering/webpack/code-spliting
 function f2 () {
   return webpack({
     entry: './index.js',
     mode: 'none',
-    output: {
-      chunkLoading: 'import'
+    optimization: {
+      runtimeChunk: true,
     }
   })
 }
 
+// mode 为 production/development 时有何区别
+// 当 mode 为 production 时，将自动开启 terser 对代码进行压缩及 Tree Shaking
 function f3 () {
-  return webpack({
-    entry: './index.js',
-    mode: 'production',
-    output: {
-      filename: 'main.production.js'
+  return webpack([
+    {
+      entry: './index.js',
+      mode: 'production',
+      output: {
+        filename: 'main.production.js'
+      }
+    },
+    {
+      entry: './index.js',
+      mode: 'development',
+      output: {
+        filename: 'main.development.js'
+      }
+    },
+    {
+      entry: './index.js',
+      output: {
+        filename: 'main.unknown.js'
+      }
     }
-  })
+  ])
 }
 
+// [contenthash] 中 hash 是如何生成的，使用了哪种 hash 算法？
+// 嗯对，现在 webpack 已经支持了数组选项，见 https://webpack.js.org/configuration/configuration-types/#exporting-multiple-configurations
 function f4 () {
-  return webpack({
-    entry: './index.js',
-    mode: 'none',
-    output: {
-      filename: 'main.[contenthash].js'
+  return webpack([
+    {
+      entry: './index.js',
+      mode: 'none',
+      output: {
+        filename: 'main.[contenthash].js'
+      }
+    }, {
+      entry: './index.js',
+      mode: 'none',
+      output: {
+        filename: 'main.[contenthash:6].js'
+      }
     }
-  })
+  ])
 }
 
+// [contenthash] 中 hash 是如何生成的，使用了哪种 hash 算法？
+// webpack 默认使用 md4 算法，webpack v5.54.0+ 后，支持 xxhash64 算法，比 md4 算法更快
+// 见：https://webpack.js.org/configuration/experiments/#experimentsfuturedefaults
+// > You can provide a non-crypto hash function for performance reasons.
 function f5 () {
+  return webpack([
+    {
+      entry: './index.js',
+      mode: 'none',
+      output: {
+        filename: 'main.[contenthash:6].md4.js',
+        hashFunction: 'md4'
+      }
+    }, {
+      entry: './index.js',
+      mode: 'none',
+      output: {
+        filename: 'main.[contenthash:6].xxhash64.js',
+        hashFunction: 'xxhash64'
+      }
+    }
+  ])
+}
+
+function f6() {
   return webpack({
     entry: './index.js',
     mode: 'none',
     output: {
       filename: '[name].[contenthash:8].js',
-      chunkFilename: '[name].[contenthash:8].chunk.js',
+      // output.path 必须为一个绝对路径
       path: path.resolve(__dirname, 'dist/runtime'),
-      clean: true
     },
     optimization: {
       runtimeChunk: true,
@@ -64,6 +120,7 @@ function f5 () {
   })
 }
 
-f1().run((err, stat) => {
+// output.path 如何指定打包目录为 build 目录
+f4().run((err, stat) => {
   // console.log(stat.toJson())
 })
