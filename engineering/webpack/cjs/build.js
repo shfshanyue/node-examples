@@ -9,6 +9,8 @@ const path = require('path')
 // 4. [id] 与 [name] 是如何生成的
 // 5. 试试 mode 为 production/development/none 时运行时代码有何不同
 // 6. output.path 如何指定打包目录为 build 目录
+// 7. devtool 对运行时有何影响
+// 8. sourcemap 的工作原理是什么样的
 
 // webpack 的运行时代码分析
 function f1 () {
@@ -120,7 +122,30 @@ function f6() {
   })
 }
 
+// mode 为 development 时的 devtool 配置
+// devtool 配置用来加强 debug 的配置
+function f7 () {
+  return webpack([
+    {
+      entry: './index.js',
+      mode: 'development',
+      devtool: 'eval',
+      output: {
+        filename: 'main.eval.js'
+      }
+    },
+    {
+      entry: './index.js',
+      mode: 'development',
+      devtool: 'eval-source-map',
+      output: {
+        filename: 'main.eval-source-map.js'
+      }
+    }
+  ])
+}
+
 // output.path 如何指定打包目录为 build 目录
-f4().run((err, stat) => {
+f7().run((err, stat) => {
   // console.log(stat.toJson())
 })
