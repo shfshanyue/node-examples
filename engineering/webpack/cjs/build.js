@@ -113,6 +113,30 @@ function f6() {
     mode: 'none',
     output: {
       filename: '[name].[contenthash:8].js',
+      path: path.resolve(__dirname, 'build'),
+    }
+  })
+}
+
+// output.publicPath 如何影响上线
+// 好吧，在打包这里一点都不影响
+function f7() {
+  return webpack({
+    entry: './index.js',
+    mode: 'none',
+    output: {
+      publicPath: 'https://static.shanyue.tech'
+    }
+  })
+}
+
+// 将 runtime 专门打包到 dist/runtime 路径
+function f8() {
+  return webpack({
+    entry: './index.js',
+    mode: 'none',
+    output: {
+      filename: '[name].[contenthash:8].js',
       // output.path 必须为一个绝对路径
       path: path.resolve(__dirname, 'dist/runtime'),
     },
@@ -124,7 +148,7 @@ function f6() {
 
 // mode 为 development 时的 devtool 配置
 // devtool 配置用来加强 debug 的配置
-function f7 () {
+function f9 () {
   return webpack([
     {
       entry: './index.js',
