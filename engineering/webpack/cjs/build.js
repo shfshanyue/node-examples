@@ -169,7 +169,18 @@ function f9 () {
   ])
 }
 
+
+function f10 () {
+  return webpack({
+    entry: './index.js',
+    mode: 'none',
+    output: {
+      filename: '[id]-[name]-[contenthash]-[chunkhash].js'
+    }
+  })
+}
+
 // output.path 如何指定打包目录为 build 目录
-f7().run((err, stat) => {
-  // console.log(stat.toJson())
+f10().run((err, stat) => {
+  console.log(JSON.stringify(stat.toJson()))
 })

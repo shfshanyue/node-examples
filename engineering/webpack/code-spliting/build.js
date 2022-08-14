@@ -1,19 +1,19 @@
 const path = require('path')
 const webpack = require('webpack')
 
-// `webpack-cli` 与 `webpack/cli` 调来调去，逻辑复杂，为了方便，直接使用其 node api 进行示例，方便调试
-
-// 1. 当有 chunk 时，webpack 的运行时代码是如何加载 chunk 的
-// 1. [contenthash].js 中的 hash 是如何生成的
-// 
+// 1. import() 打包后运行时代码长什么样子
+// 2. chunkFilename 与 filename 有何区别
+// 3. import() 加载 chunk 除了 JSONP，用 import 的方式加载如何
+// 4. deterministic 有何作用
+// 5. magic comment
 
 function f1 () {
   return webpack({
     entry: './index.js',
     mode: 'none',
     output: {
-      filename: 'main.[contenthash].js',
-      chunkFilename: '[name].chunk.[contenthash].js',
+      filename: 'main.[id].[contenthash].js',
+      chunkFilename: '[name].[id].chunk.[contenthash].js',
       path: path.resolve(__dirname, 'dist/contenthash'),
       clean: true
     }
@@ -22,12 +22,12 @@ function f1 () {
 
 function f2 () {
   return webpack({
-    entry: './index.js',
+    entry: './magic.index.js',
     mode: 'none',
     output: {
       filename: 'main.[contenthash].js',
-      chunkFilename: '[id].chunk.[contenthash].js',
-      path: path.resolve(__dirname, 'dist/contenthash')
+      chunkFilename: '[name].[id].chunk.[contenthash].js',
+      path: path.resolve(__dirname, 'dist/magic')
     }
   })
 }
@@ -82,6 +82,6 @@ function f5 () {
   })
 }
 
-f4().run((err, stat) => {
-  console.log(stat.toJson())
+f1().run((err, stat) => {
+  console.log(JSON.stringify(stat.toJson(), null, 2))
 })
