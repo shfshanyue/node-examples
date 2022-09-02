@@ -41,7 +41,9 @@ function f3 () {
       chunkFilename: '[name].chunk.[chunkhash].js',
       path: path.resolve(__dirname, 'dist/import'),
       clean: true,
-      chunkLoading: 'import'
+      // chunkLoading: 'import',
+      // chunkFormat: 'module',
+      chunkLoadingGlobal: 'hello'
     }
   })
 }
@@ -72,6 +74,29 @@ function f5 () {
       filename: '[name].[contenthash].js',
       chunkFilename: '[name].[contenthash].chunk.js',
       path: path.resolve(__dirname, 'dist/runtime'),
+    },
+    optimization: {
+      moduleIds: 'deterministic',
+      chunkIds: 'deterministic',
+      runtimeChunk: true
+    }
+  })
+}
+
+// 通过 experiments.outputModule 可配置打包为 ESM
+function f7 () {
+  return webpack({
+    entry: './index.js',
+    mode: 'none',
+    target: 'es2020',
+    experiments: {
+      outputModule: true
+    },
+    output: {
+      module: true,
+      filename: '[name].[contenthash].js',
+      chunkFilename: '[name].[contenthash].chunk.js',
+      path: path.resolve(__dirname, 'dist/module'),
       clean: true
     },
     optimization: {
@@ -82,6 +107,6 @@ function f5 () {
   })
 }
 
-f1().run((err, stat) => {
+f5().run((err, stat) => {
   console.log(JSON.stringify(stat.toJson(), null, 2))
 })
