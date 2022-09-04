@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 
+// 1. 多个 chunk 公共的 common 模块如何被打包
 function f1 () {
   return webpack({
     entry: './index.js',
