@@ -7,7 +7,7 @@ function f1 () {
     entry: './index.js',
     mode: 'none',
     output: {
-      filename: 'main.[id].[contenthash].js',
+      filename: '[main].[id].[contenthash].js',
       chunkFilename: '[name].[id].chunk.[contenthash].js',
       path: path.resolve(__dirname, 'dist/contenthash'),
     },
@@ -22,6 +22,33 @@ function f1 () {
 }
 
 
-f1().run((err, stat) => {
+function f2 () {
+  return webpack({
+    entry: './index.js',
+    mode: 'none',
+    output: {
+      filename: '[name].[id].[contenthash].js',
+      chunkFilename: '[name].[id].chunk.[contenthash].js',
+      path: path.resolve(__dirname, 'dist/splitchunk'),
+    },
+    optimization: {
+      runtimeChunk: {
+        name: entrypoint => `runtime-${entrypoint.name}`,
+      },
+      chunkIds: 'deterministic',
+      moduleIds: 'deterministic',
+      splitChunks: {
+        name: 'common',
+        chunks: 'all',
+        minChunks: 2,
+        minSize: 0,
+        reuseExistingChunk: true
+      }
+    }
+  })
+}
+
+
+f2().run((err, stat) => {
   console.log(JSON.stringify(stat.toJson(), null, 2))
 })

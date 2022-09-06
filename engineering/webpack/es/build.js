@@ -25,5 +25,5 @@ function f2 () {
 }
 
 f2().run((err, stat) => {
-  // console.log(stat.toJson())
+  console.log(JSON.stringify(stat.toJson(), null, 2))
 })

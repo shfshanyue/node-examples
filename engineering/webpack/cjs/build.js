@@ -180,7 +180,35 @@ function f10 () {
   })
 }
 
+function f11 () {
+  return webpack({
+    entry: './index.js',
+    mode: 'none',
+    output: {
+      environment: {
+        const: true,
+        arrowFunction: true,
+        forOf: true
+      }
+    }
+  })
+}
+
+function f12 () {
+  return webpack({
+    entry: './index.js',
+    mode: 'none',
+    output: {
+      environment: {
+        const: true,
+        arrowFunction: true,
+        forOf: true
+      }
+    }
+  })
+}
+
 // output.path 如何指定打包目录为 build 目录
-f10().run((err, stat) => {
+f11().run((err, stat) => {
   console.log(JSON.stringify(stat.toJson()))
 })

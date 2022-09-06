@@ -21,15 +21,23 @@ function f1 () {
 }
 
 function f2 () {
-  return webpack({
-    entry: './magic.index.js',
+  return webpack([{
+    entry: './comment.index.js',
     mode: 'none',
     output: {
-      filename: 'main.[contenthash].js',
+      filename: '[name].[contenthash].js',
       chunkFilename: '[name].[id].chunk.[contenthash].js',
-      path: path.resolve(__dirname, 'dist/magic')
+      path: path.resolve(__dirname, 'dist/comment')
     }
-  })
+  }, {
+    entry: './prefetch.index.js',
+    mode: 'none',
+    output: {
+      filename: '[name].[contenthash].js',
+      chunkFilename: '[name].[id].chunk.[contenthash].js',
+      path: path.resolve(__dirname, 'dist/prefetch')
+    }
+  }])
 }
 
 function f3 () {
@@ -107,6 +115,6 @@ function f7 () {
   })
 }
 
-f5().run((err, stat) => {
+f2().run((err, stat) => {
   console.log(JSON.stringify(stat.toJson(), null, 2))
 })
