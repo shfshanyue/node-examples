@@ -42,7 +42,6 @@ function f2 () {
         chunks: 'all',
         minChunks: 2,
         minSize: 0,
-        reuseExistingChunk: true
       }
     }
   })
