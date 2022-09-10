@@ -7,7 +7,7 @@ function f1 () {
     entry: './index.js',
     mode: 'none',
     output: {
-      filename: '[main].[id].[contenthash].js',
+      filename: '[name].[id].[contenthash].js',
       chunkFilename: '[name].[id].chunk.[contenthash].js',
       path: path.resolve(__dirname, 'dist/contenthash'),
     },
