@@ -1,4 +1,4 @@
-import http from 'http'
+const http = require('http')
 
 const server = http.createServer((req, res) => {
 
@@ -19,8 +19,13 @@ const server = http.createServer((req, res) => {
     },
     // 如果返回错误的 Content-Length，会如何？
     '/correct-length': () => {
-      res.setHeader('content-length', 10)
-      res.end('天地玄黄，宇宙洪荒。日月盈昃，辰宿列张。')
+      res.setHeader('content-length', 5)
+      res.end('0123456789')
+    },
+    // 如果不返回 Content-Length，则 node 内部会自动计算一个 content-length
+    '/miss-length': () => {
+      res.removeHeader('content-length')
+      res.end('0123456789')
     },
     '/attachment': () => {
       res.setHeader('content-disposition', 'attachment; filename=hello.txt')
