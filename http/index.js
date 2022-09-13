@@ -22,8 +22,9 @@ const server = http.createServer((req, res) => {
       res.setHeader('content-length', 5)
       res.end('0123456789')
     },
-    // 如果不返回 Content-Length，则 node 内部会自动计算一个 content-length
     '/miss-length': () => {
+      // node 会自动计算一个 content-length，如果需要去除 content-length，则使用 res.removeHeader
+      // 当 node.js 去除了该 header 时，它将使用 transfer-encoding 的方式进行数据传输
       res.removeHeader('content-length')
       res.end('0123456789')
     },
@@ -31,6 +32,14 @@ const server = http.createServer((req, res) => {
       res.setHeader('content-disposition', 'attachment; filename=hello.txt')
       res.end('hello, world')
     },
+    '/headers': () => {
+      const headers = req.headers
+      res.end(JSON.stringify(headers, null, 2))
+    },
+    '/rawHeaders': () => {
+      const headers = req.rawHeaders
+      res.end(JSON.stringify(headers, null, 2))
+    }
   }
 
   for (const [path, handle] of Object.entries(routes)) {

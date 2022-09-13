@@ -32,7 +32,7 @@ function f1 () {
     mode: 'none',
     output: {
       filename: '[name].[id].[contenthash].js',
-      chunkFilename: '[name].[id].chunk.[contenthash].js',
+      chunkFilename: '[name].[id].[contenthash].chunk.js',
       path: path.resolve(__dirname, 'dist/contenthash'),
     }
   })
@@ -134,6 +134,6 @@ function f7 () {
   })
 }
 
-f5().run((err, stat) => {
+f1().run((err, stat) => {
   console.log(JSON.stringify(stat.toJson(), null, 2))
 })

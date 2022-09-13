@@ -21,9 +21,11 @@
       "program": "/usr/local/bin/node_g",
       "stopAtEntry": true,
       "cwd": "${workspaceFolder}",
-    
       // 对于 JS 打开调试，调试文件为根目录中的 demo.js 
-      "args": ["--inspect-brk", "${workspaceFolder}/node-native/zlib/index.js"],
+      "args": [
+        "--inspect-brk",
+        "${workspaceFolder}/node-native/zlib/index.js"
+      ],
       "environment": [],
       "externalConsole": true,
       "MIMode": "lldb"
