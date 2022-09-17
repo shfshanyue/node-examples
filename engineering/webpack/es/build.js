@@ -13,17 +13,21 @@ function f1 () {
   })
 }
 
+// 通过 experiments.outputModule 可配置输出为 ESM，但仍然包含大量的运行时代码
 function f2 () {
   return webpack({
     entry: './index.js',
     mode: 'none',
-    infrastructureLogging: {
-      debug: true,
-      level: 'log',
+    target: 'es2020',
+    experiments: {
+      outputModule: true
+    },
+    output: {
+      filename: 'main.mjs',
     }
   })
 }
 
-f1().run((err, stat) => {
+f2().run((err, stat) => {
   console.log(JSON.stringify(stat.toJson(), null, 2))
 })
