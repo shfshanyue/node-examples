@@ -1,3 +1,4 @@
+const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -14,6 +15,7 @@ function f1 () {
       iife: false,
       pathinfo: 'verbose',
       filename: '[name].[contenthash:8].js',
+      path: path.join(__dirname, 'dist/runtime'),
       clean: true,
       publicPath: 'https://shanyue.tech'
     },
