@@ -51,7 +51,7 @@
     "koa": "^2.13.4",
     "mathjs": "^11.2.1",
     "mermaid": "^9.1.7",
-    "midash": "^0.3.0",
+    "midash": "^0.4.0",
     "mini-css-extract-plugin": "^2.6.1",
     "mustache": "^4.2.0",
     "nodemon": "^2.0.20",
