@@ -2,6 +2,8 @@ const path = require('path')
 const _ = require('lodash')
 const webpack = require('webpack')
 
+/** @typedef {import("webpack").Configuration} Configuration */
+
 const normalConfig = {
   entry: './index.js',
   mode: 'none',
@@ -51,6 +53,18 @@ const lodashCommonConfig = _.merge({}, normalConfig, {
   },
 })
 
+const initialLodashCommonSplitChunksConfig = _.merge({}, lodashCommonConfig, {
+  entry: './common.lodash.index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist/initialLodashCommonSplitChunk'),
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  }
+})
+
 // 1. 多个 chunk 公共的 common 模块如何被打包
 function f1() {
   return webpack([normalConfig, splitChunkConfig])
@@ -64,7 +78,11 @@ function f3() {
   return webpack([normalConfig, lodashCommonConfig])
 }
 
+function f4() {
+  return webpack([lodashCommonConfig, initialLodashCommonSplitChunksConfig])
+}
 
-f3().run((err, stat) => {
+
+f4().run((err, stat) => {
   console.log(JSON.stringify(stat.toJson(), null, 2))
 })
