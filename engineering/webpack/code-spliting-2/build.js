@@ -41,6 +41,11 @@ const initialCommonSplitChunkConfig = _.merge({}, splitChunkConfig, {
   output: {
     path: path.resolve(__dirname, 'dist/initialCommonSplitchunk'),
   },
+  optimization: {
+    splitChunks: {
+      minSizeReduction: 0,
+    }
+  }
 })
 
 // 如果将引用的公共模块 common.js 替换为 lodash 将会如何
@@ -60,6 +65,7 @@ const initialLodashCommonSplitChunksConfig = _.merge({}, lodashCommonConfig, {
   },
   optimization: {
     splitChunks: {
+      // 试着注释它会发生什么
       chunks: 'all'
     }
   }
@@ -83,6 +89,6 @@ function f4() {
 }
 
 
-f4().run((err, stat) => {
+f1().run((err, stat) => {
   console.log(JSON.stringify(stat.toJson(), null, 2))
 })

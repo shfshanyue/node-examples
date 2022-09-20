@@ -44,7 +44,7 @@ function f2 () {
     mode: 'none',
     output: {
       filename: '[name].[contenthash].js',
-      chunkFilename: '[name].[id].chunk.[contenthash].js',
+      chunkFilename: '[name].[id].[contenthash].chunk.js',
       path: path.resolve(__dirname, 'dist/comment')
     }
   }, {
@@ -52,7 +52,7 @@ function f2 () {
     mode: 'none',
     output: {
       filename: '[name].[contenthash].js',
-      chunkFilename: '[name].[id].chunk.[contenthash].js',
+      chunkFilename: '[name].[id].[contenthash].chunk.js',
       path: path.resolve(__dirname, 'dist/prefetch')
     }
   }])
@@ -64,7 +64,7 @@ function f3 () {
     mode: 'none',
     output: {
       filename: 'main.[contenthash].js',
-      chunkFilename: '[name].chunk.[chunkhash].js',
+      chunkFilename: '[name].[chunkhash].chunk.js',
       path: path.resolve(__dirname, 'dist/import'),
       clean: true,
       // chunkLoading: 'import',
@@ -81,7 +81,7 @@ function f4 () {
     mode: 'none',
     output: {
       filename: '[name].[contenthash].js',
-      chunkFilename: 'chunk.[name].[id].[contenthash].js',
+      chunkFilename: '[name].[id].[contenthash].chunk.js',
       path: path.resolve(__dirname, 'dist/deterministic'),
       clean: true
     },
