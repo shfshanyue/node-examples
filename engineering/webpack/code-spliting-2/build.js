@@ -40,10 +40,23 @@ const initialCommonSplitChunkConfig = _.merge({}, splitChunkConfig, {
   entry: './common.index.js',
   output: {
     path: path.resolve(__dirname, 'dist/initialCommonSplitchunk'),
+    clean: true
   },
   optimization: {
     splitChunks: {
       minSizeReduction: 0,
+      cacheGroups: {
+        default: {
+          name: 'common',
+          idHint: '',
+          reuseExistingChunk: false,
+          minChunks: 2,
+          minSize: 0,
+          priority: -20,
+          minSizeReduction: 0,
+          minRemainingSize: 0,
+        }
+      }
     }
   }
 })
@@ -88,7 +101,18 @@ function f4() {
   return webpack([lodashCommonConfig, initialLodashCommonSplitChunksConfig])
 }
 
+function f5() {
+  return webpack(splitChunkConfig)
+}
 
-f1().run((err, stat) => {
+function f6() {
+  return webpack(initialCommonSplitChunkConfig)
+}
+
+function f7() {
+  return webpack(initialLodashCommonSplitChunksConfig)
+}
+
+f6().run((err, stat) => {
   console.log(JSON.stringify(stat.toJson(), null, 2))
 })

@@ -209,6 +209,6 @@ function f12 () {
 }
 
 // output.path 如何指定打包目录为 build 目录
-f11().run((err, stat) => {
-  console.log(JSON.stringify(stat.toJson()))
+f1().run((err, stat) => {
+  // console.log(JSON.stringify(stat.toJson()))
 })
