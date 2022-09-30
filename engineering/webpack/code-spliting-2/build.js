@@ -51,10 +51,6 @@ const initialCommonSplitChunkConfig = _.merge({}, splitChunkConfig, {
           idHint: '',
           reuseExistingChunk: false,
           minChunks: 2,
-          minSize: 0,
-          priority: -20,
-          minSizeReduction: 0,
-          minRemainingSize: 0,
         }
       }
     }
