@@ -39,6 +39,11 @@ const server = http.createServer((req, res) => {
     '/rawHeaders': () => {
       const headers = req.rawHeaders
       res.end(JSON.stringify(headers, null, 2))
+    },
+    '/cache': () => {
+      res.setHeader('cache-control', 'max-age=100')
+      res.setHeader('age', '90')
+      res.end('Cache 100s')
     }
   }
 
