@@ -44,6 +44,10 @@ const server = http.createServer((req, res) => {
       res.setHeader('cache-control', 'max-age=100')
       res.setHeader('age', '90')
       res.end('Cache 100s')
+    },
+    '/304': () => {
+      res.statusCode = 304
+      res.end('hello, world')
     }
   }
 
