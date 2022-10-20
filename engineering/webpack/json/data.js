@@ -1,4 +1,5 @@
-module.exports = {
+export default {
   a: 3,
-  b: 4
+  b: 4,
+  type: 'javascript'
 }

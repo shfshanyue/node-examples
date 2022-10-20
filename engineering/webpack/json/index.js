@@ -1,5 +1,5 @@
-import o from './data.json'
-import oo from './data.js'
+import json from './data.json'
+import data from './data.js'
 
-console.log(o.a)
-console.log(oo.a)
+console.log(json.a)
+console.log(data.a)

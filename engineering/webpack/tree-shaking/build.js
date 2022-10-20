@@ -13,7 +13,8 @@ function f2 () {
     mode: 'none',
     devtool: false,
     optimization: {
-      // usedExports: true
+      usedExports: true,
+      sideEffects: false
     }
   })
 }

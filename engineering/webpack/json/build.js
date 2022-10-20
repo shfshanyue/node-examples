@@ -1,18 +1,37 @@
 const webpack = require('webpack')
 
-// 对于 JSON 而言，webpack (usedExports) 中会自动进行 Tree Shaking
-// 而对于 Javascript Object 而言，不会进行 Tree Shaking
-
-function f1 () {
+// 对于 JSON 而言，webpack 并不会自动进行 Tree Shaking
+function f1() {
   return webpack({
     entry: './index.js',
     mode: 'none',
+  })
+}
+
+// 对于 JSON 而言，webpack，需手动开启 usedExports 才会进行 Tree Shaking
+function f2() {
+  return webpack({
+    entry: './index.js',
+    mode: 'none',
+    output: {
+      filename: 'use-exports.main.js'
+    },
     optimization: {
       usedExports: true
     }
   })
 }
 
-f1().run((err, stat) => {
+function f3() {
+  return webpack({
+    entry: './index.js',
+    mode: 'production',
+    output: {
+      filename: 'production.main.js'
+    }
+  })
+}
+
+f2().run((err, stat) => {
   // console.log(stat.toJson())
 })
