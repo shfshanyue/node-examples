@@ -48,6 +48,29 @@ const server = http.createServer((req, res) => {
     '/304': () => {
       res.statusCode = 304
       res.end('hello, world')
+    },
+    // 测试用例：在任意跨域页面打开控制台，手写以下代码发送请求，并观察网络面板
+    // await fetch('http://localhost:3000/cors', { method: 'POST', body: JSON.stringify({ a: 3 }), headers: { 'content-type': 'application/json' } })
+    // await fetch('http://localhost:3000/cors', { method: 'POST', body: JSON.stringify({ a: 3 }), headers: { 'content-type': 'application/json' }, credentials: 'include' })
+    // 
+    // 该请求没有指定 METHOD，因此所有方法都能进来
+    '/cors': () => {
+      // res.setHeader('access-control-allow-origin', '*')
+      res.setHeader('access-control-allow-origin', req.headers['origin'])
+
+      res.setHeader('access-control-allow-credentials', true)
+
+      // 专为 OPTIONS 设计，如果没有该响应头，则
+      // 注意：可进行注释再次测试
+      res.setHeader('access-control-allow-headers', 'content-type')
+
+      // 配置 cookie，测试跨域时是否能携带 cookie 测试
+      res.setHeader('set-cookie', 'a=3; SameSite=None')
+
+      // 返回 JSON 格式
+      res.end(JSON.stringify({
+        cors: true
+      }))
     }
   }
 
