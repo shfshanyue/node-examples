@@ -1,6 +1,6 @@
-const http = require('http')
+import { createServer, IncomingMessage, ServerResponse } from 'http'
 
-const server = http.createServer((req, res) => {
+export default function handler (req: IncomingMessage, res: ServerResponse) {
 
   // 其实这个对象完全可以放在外边，放在这里边纯粹是因为方便类型自动补全
   const routes = {
@@ -56,9 +56,9 @@ const server = http.createServer((req, res) => {
     // 该请求没有指定 METHOD，因此所有方法都能进来
     '/cors': () => {
       // res.setHeader('access-control-allow-origin', '*')
-      res.setHeader('access-control-allow-origin', req.headers['origin'])
+      res.setHeader('access-control-allow-origin', req.headers['origin'] as string)
 
-      res.setHeader('access-control-allow-credentials', true)
+      res.setHeader('access-control-allow-credentials', 'true')
 
       // 专为 OPTIONS 设计，如果没有该响应头，则
       // 注意：可进行注释再次测试
@@ -79,6 +79,7 @@ const server = http.createServer((req, res) => {
       handle()
     }
   }
-})
+}
 
+const server = createServer(handler)
 server.listen(3000, () => { console.log('Listening') })
