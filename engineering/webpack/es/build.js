@@ -28,6 +28,17 @@ function f2 () {
   })
 }
 
-f2().run((err, stat) => {
+// 为了方便调试，直接引用 esm 作为入口文件
+function f3 () {
+  return webpack({
+    entry: './sum.js',
+    mode: 'none',
+    output: {
+      filename: 'sum.js'
+    }
+  })
+}
+
+f3().run((err, stat) => {
   console.log(JSON.stringify(stat.toJson(), null, 2))
 })

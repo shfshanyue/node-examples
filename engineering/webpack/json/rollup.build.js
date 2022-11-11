@@ -31,6 +31,18 @@ async function f2() {
   })
 }
 
-f2().then(o => {
+async function f3() {
+  const bundle = await rollup.rollup({
+    input: ['./assert-import.js'],
+    plugins: [
+      json()
+    ]
+  })
+  return bundle.write({
+    file: 'dist/rollup/assert-import.js'
+  })
+}
+
+f3().then(o => {
   console.log(o)
 })
