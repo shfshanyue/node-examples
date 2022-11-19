@@ -64,6 +64,7 @@
     "postcss-nested": "^6.0.0",
     "prettier": "^2.7.1",
     "raw-body": "^2.5.1",
+    "raw-loader": "^4.0.2",
     "remark-parse": "^10.0.1",
     "rollup": "^3.2.3",
     "serve": "^14.0.1",

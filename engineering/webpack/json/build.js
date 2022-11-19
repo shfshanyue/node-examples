@@ -73,6 +73,6 @@ function f6() {
   })
 }
 
-f6().run((err, stat) => {
+f4().run((err, stat) => {
   // console.log(stat.toJson())
 })
