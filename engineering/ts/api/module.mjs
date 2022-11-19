@@ -1,6 +1,12 @@
 import ts from 'typescript'
 const { transpile, ScriptTarget, ModuleKind } = ts
 
+// module
+// doc: https://www.typescriptlang.org/tsconfig#module
+//
+// 1. ES2015/ES2020/ES2022/ESNext 没有区别
+// 2. Node16/NodeNext/Commonjs/Node 没有区别
+
 const options1 = {
   // 将代码转换为 ES2021 支持的格式，比如 Optional Chaining Operator 将不会有垫片
   target: ScriptTarget.ES2021,
@@ -44,17 +50,47 @@ const options5 = {
   // 将代码模块化方案由 ESM 转化为 ESM 格式
   // 即 import/export
   // 值为 ES2015、ES2020、ES2022、ESNext 拥有相同的效果
-  module: ModuleKind.ESNext
+  module: ModuleKind.ES2022
 }
 
 const options6 = {
-  // 将代码转换为 ES2015 支持的格式，比如 Optional Chaining Operator 将会有垫片
-  target: ScriptTarget.ES2015,
+  // 将代码转换为 ES2021 支持的格式，比如 Optional Chaining Operator 将不会有垫片
+  target: ScriptTarget.ES2021,
+
+  // 将代码模块化方案由 ESM 转化为 ESM 格式
+  // 即 import/export
+  // 值为 ES2015、ES2020、ES2022、ESNext 拥有相同的效果
+  module: ModuleKind.ES2022
+}
+
+const options7 = {
+  // 将代码转换为 ES2021 支持的格式，比如 Optional Chaining Operator 将不会有垫片
+  target: ScriptTarget.ES2021,
 
   // 将代码模块化方案由 ESM 转化为 ESM 格式
   // 即 import/export
   // 值为 ES2015、ES2020、ES2022、ESNext 拥有相同的效果
   module: ModuleKind.ESNext
+}
+
+const options8 = {
+  // 将代码转换为 ES2021 支持的格式，比如 Optional Chaining Operator 将不会有垫片
+  target: ScriptTarget.ES2021,
+
+  // 将代码模块化方案由 ESM 转化为 ESM 格式
+  // 即 import/export
+  // 值为 ES2015、ES2020、ES2022、ESNext 拥有相同的效果
+  module: ModuleKind.Node16
+}
+
+const options9 = {
+  // 将代码转换为 ES2021 支持的格式，比如 Optional Chaining Operator 将不会有垫片
+  target: ScriptTarget.ES2021,
+
+  // 将代码模块化方案由 ESM 转化为 ESM 格式
+  // 即 import/export
+  // 值为 ES2015、ES2020、ES2022、ESNext 拥有相同的效果
+  module: ModuleKind.NodeNext
 }
 
 const input = `
@@ -63,8 +99,10 @@ function sum (x: number, y: number) {
 }
 
 const o: any = {}
+// ES2020
 const a = o?.a?.b?.c
 
+// ES2021
 const any = Promise.any
 
 export {
@@ -74,6 +112,5 @@ export {
 }
 `
 
-const output = transpile(input, options6)
-
+const output = transpile(input, options9)
 console.log(output)
