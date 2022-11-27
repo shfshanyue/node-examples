@@ -6,3 +6,4 @@ package-lock.gz
 jsonl
 *.out
 dist
+rust

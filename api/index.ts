@@ -68,7 +68,7 @@ const routes: Record<string, RequestListener> = {
     res.end(JSON.stringify({
       cors: true
     }))
-  }
+  },
 }
 export default function handler(req: IncomingMessage, res: ServerResponse) {
   for (const [path, handle] of Object.entries(routes)) {
