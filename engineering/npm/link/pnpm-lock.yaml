@@ -1,0 +1,6 @@
+lockfileVersion: '6.0'
+
+dependencies:
+  midash:
+    specifier: ^0.9.1
+    version: link:node_modules/midash
