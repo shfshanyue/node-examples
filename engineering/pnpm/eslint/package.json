@@ -1,0 +1,16 @@
+{
+  "name": "pnpm-eslint-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint *.ts"
+  },
+  "author": "shfshanyue",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.0.1",
+    "eslint-config-next": "latest"
+  }
+}
