@@ -11,14 +11,14 @@ importers:
   packages/a:
     dependencies:
       postcss:
-        specifier: ^8.4.29
-        version: 8.4.29
+        specifier: ^8.4.10
+        version: 8.4.10
 
   packages/b:
     dependencies:
       postcss:
-        specifier: ^8.4.29
-        version: 8.4.29
+        specifier: 8.4.28
+        version: 8.4.28
 
 packages:
 
@@ -32,8 +32,17 @@ packages:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
     dev: false
 
-  /postcss@8.4.29:
-    resolution: {integrity: sha512-cbI+jaqIeu/VGqXEarWkRCCffhjgXc0qjBtXpqJhTBohMUjUQnbBr0xqX3vEKudc4iviTewcJo5ajcec5+wdJw==}
+  /postcss@8.4.10:
+    resolution: {integrity: sha512-84ERZDkObgU3JLeBzqB0DK3+kFHhhxAngTIeOL4cAykcVYaY4ie3iAzaroXpYeHJNZcPIVvbGAyRxDsqJUUSJg==}
+    engines: {node: ^10 || ^12 || >=14}
+    dependencies:
+      nanoid: 3.3.6
+      picocolors: 1.0.0
+      source-map-js: 1.0.2
+    dev: false
+
+  /postcss@8.4.28:
+    resolution: {integrity: sha512-Z7V5j0cq8oEKyejIKfpD8b4eBy9cwW2JWPk0+fB1HOAMsfHbnAXLLS+PfVWlzMSLQaWttKDt607I0XHmpE67Vw==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.6

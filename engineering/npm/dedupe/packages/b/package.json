@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "postcss": "^8.4.29"
+    "postcss": "8.4.28"
   },
   "keywords": [],
   "author": "shfshanyue",
