@@ -1,0 +1,15 @@
+{
+  "name": "peer-use-debounce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shfshanyue",
+  "license": "ISC",
+  "dependencies": {
+    "use-debounce": "^9.0.4",
+    "react": "16.0.x"
+  }
+}
