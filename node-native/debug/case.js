@@ -87,5 +87,6 @@
   const obj = null
 
   // 这里有问题，如何才能够捕捉到
+  // 先注释，否则影响输出
   console.log(obj.a)
 }
