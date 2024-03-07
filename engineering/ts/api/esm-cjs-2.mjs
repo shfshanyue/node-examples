@@ -3,17 +3,24 @@ const { transpile, ScriptTarget, ModuleKind } = ts
 
 // doc: https://www.typescriptlang.org/tsconfig#esModuleInterop
 
+const input2 = `
+import React from 'react'
+
+function Counter() {
+  const [count, setCount] = React.useState(0)
+}
+`
+
 const input = `
-export function add(a: number, b: number): number {
-  return a + b
-}
+import React, { useEffect } from 'react'
 
-export function subtract(a: number, b: number): number {
-  return a - b;
-}
+function Counter() {
+  const [count, setCount] = React.useState(0)
 
-const name = 'math';
-export default name;
+  useEffect(() => {
+    console.log('count', count)
+  }
+}
 `
 
 function f1() {
@@ -40,7 +47,7 @@ function f3() {
     transpile(input, {
       target: ScriptTarget.ESNext,
       module: ModuleKind.CommonJS,
-      // allowSyntheticDefaultImports: true,
+      allowSyntheticDefaultImports: true,
       esModuleInterop: true
     })
   )
